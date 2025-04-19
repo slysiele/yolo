@@ -1,28 +1,32 @@
-# Use an official Node runtime as a parent image
-FROM node:14-slim AS build
+# Build stage
+FROM node:20-alpine3.21 as build-stage
 
-# Set the working directory in the container
-WORKDIR /usr/src/app
+# Set the working directory inside the container
+WORKDIR /client
 
-# Copy the package.json and package-lock.json files to the container
+# Copy package.json and package-lock.json
 COPY package*.json ./
 
-# Install application dependencies
-RUN npm install
+# Install all dependencies (for both development and production)
+RUN npm install --only=production && \
+    npm cache clean --force && \
+    rm -rf /tmp/*
 
-# Copy the rest of the application code to the container
+# Copy the rest of the application code
 COPY . .
 
-FROM alpine:3.16.7
+# Build the application (this generates the static files)
+ENV NODE_OPTIONS=--openssl-legacy-provider
+RUN npm run build
 
-WORKDIR /app
+# Production stage
+FROM nginx:alpine as production-stage
 
-RUN apk update && apk add npm
+# Copy the built static files from the build-stage to Nginx's HTML directory
+COPY --from=build-stage /client/build /usr/share/nginx/html
 
-COPY --from=build /usr/src/app /app
+# Expose port 80 for the Nginx server
+EXPOSE 80
 
-# Expose the port the app runs on
-EXPOSE 3000
-
-# Define the command to run your app
-CMD ["npm", "start"]
+# Start Nginx to serve the static files
+CMD ["nginx", "-g", "daemon off;"]
