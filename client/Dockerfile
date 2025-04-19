@@ -1,32 +1,26 @@
 # Build stage
-FROM node:20-alpine3.21 as build-stage
+FROM node:20-alpine3.21 as build
 
-# Set the working directory inside the container
-WORKDIR /client
+WORKDIR /app
 
-# Copy package.json and package-lock.json
-COPY package*.json ./
-
-# Install all dependencies (for both development and production)
-RUN npm install --only=production && \
-    npm cache clean --force && \
-    rm -rf /tmp/*
-
-# Copy the rest of the application code
-COPY . .
-
-# Build the application (this generates the static files)
+# Set legacy OpenSSL mode to avoid Webpack error
 ENV NODE_OPTIONS=--openssl-legacy-provider
+
+COPY package*.json ./
+RUN npm install && npm cache clean --force && rm -rf /tmp/*
+
+COPY . .
 RUN npm run build
 
-# Production stage
-FROM nginx:alpine as production-stage
+# Production stage with Nginx
+FROM nginx:stable-alpine as production
 
-# Copy the built static files from the build-stage to Nginx's HTML directory
-COPY --from=build-stage /client/build /usr/share/nginx/html
+# Copy built files to nginx public folder
+COPY --from=build /app/build /usr/share/nginx/html
 
-# Expose port 80 for the Nginx server
+# Copy custom nginx config if needed (optional)
+# COPY nginx.conf /etc/nginx/nginx.conf
+
 EXPOSE 80
 
-# Start Nginx to serve the static files
 CMD ["nginx", "-g", "daemon off;"]

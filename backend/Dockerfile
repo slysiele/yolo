@@ -1,10 +1,10 @@
-# Setting the base image
+# Set base image
 FROM node:20-alpine3.21
 
-# Setting the working directory in the container
-WORKDIR /backend
+# Set working directory
+WORKDIR /app
 
-# Copy only the package files to install dependencies first
+# Copy dependency files
 COPY package*.json ./
 
 # Install only production dependencies
@@ -12,19 +12,14 @@ RUN npm install --only=production && \
     npm cache clean --force && \
     rm -rf /tmp/*
 
-# Copy the rest of the application source code
+# Copy application source
 COPY . .
 
-# Set environment variable for production
+# Set environment
 ENV NODE_ENV=production
 
-# Expose the backend port
+# Expose backend port
 EXPOSE 5000
 
-# Remove dev dependencies (if any remain), clean cache again, and delete temp files
-RUN npm prune --production && \
-    npm cache clean --force && \
-    rm -rf /tmp/*
-
-# Start the backend server
+# Start the application
 CMD ["npm", "start"]
