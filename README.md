@@ -55,3 +55,11 @@ NAME                 IMAGE                                  COMMAND             
 app-mongo            mongo                                  "docker-entrypoint.s…"   app-ip-mongo         15 hours ago     Up 21 minutes   0.0.0.0:27017->27017/tcp, [::]:27017->27017/tcp
 brian-yolo-backend   brianbwire/brian-yolo-backend:v1.0.0   "node server.js"         brian-yolo-backend   21 minutes ago   Up 21 minutes   0.0.0.0:5000->5000/tcp, [::]:5000->5000/tcp
 brian-yolo-client    brianbwire/brian-yolo-client:v1.0.0    "npm start"              brian-yolo-client    49 minutes ago   Up 21 minutes   0.0.0.0:3000->3000/tcp, [::]:3000->3000/tcp
+
+# Docker Networks created
+silvestor@silvestor:~/WORKSPACE/yolo$ docker network ls
+NETWORK ID     NAME                   DRIVER    SCOPE
+0f4e1a8da9a0   app-net                bridge    local
+cd2dccda4a50   bridge                 bridge    local
+
+
