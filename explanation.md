@@ -103,7 +103,19 @@ backend:
 
 All containers are connected to the yolo_app-net bridge network.
 
-## 4. Git Workflow to achieve the given tasks
+## 4. Docker compose volume defination and usage
+The docker compose file defines volume for mongodb to persist data, ensuring that the data remains intact even if the container is stopped or deleted.
+
+on the yaml file:
+
+```
+volumes:
+  app-mongo-data:
+    driver: local
+
+```
+
+## 5. Git Workflow to achieve the given tasks
 
 To carry out the tasks given on the assessment, the below git workflow was used:
 
