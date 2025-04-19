@@ -1,29 +1,30 @@
-# Use an official Node runtime as a parent image
-FROM node:14 AS build
+# Setting the base image
+FROM node:20-alpine3.21
 
-# Set the working directory in the container
-WORKDIR /usr/src/app
+# Setting the working directory in the container
+WORKDIR /backend
 
-# Copy the package.json and package-lock.json files to the container
+# Copy only the package files to install dependencies first
 COPY package*.json ./
 
-# Install application dependencies
-RUN npm install
+# Install only production dependencies
+RUN npm install --only=production && \
+    npm cache clean --force && \
+    rm -rf /tmp/*
 
-# Copy the rest of the application code to the container
+# Copy the rest of the application source code
 COPY . .
 
-#Add multi-stage build
-FROM alpine:3.16.7
+# Set environment variable for production
+ENV NODE_ENV=production
 
-WORKDIR /app
-
-RUN apk update && apk add --update nodejs
-
-COPY --from=build /usr/src/app /app
-
-# Expose the port the app runs on
+# Expose the backend port
 EXPOSE 5000
 
-# Define the command to run your app
-CMD ["node", "server.js"]
+# Remove dev dependencies (if any remain), clean cache again, and delete temp files
+RUN npm prune --production && \
+    npm cache clean --force && \
+    rm -rf /tmp/*
+
+# Start the backend server
+CMD ["npm", "start"]
