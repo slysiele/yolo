@@ -136,5 +136,8 @@ To carry out the tasks given on the assessment, the below git workflow was used:
    `git push`
 9. Build all the images
    `docker compose up --build`
-10. 
+10. Pushed the images to docker hub
+   `docker push`
+11. Deploying the containers
+    `docker compose up`
 
