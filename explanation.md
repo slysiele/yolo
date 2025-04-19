@@ -122,6 +122,19 @@ To carry out the tasks given on the assessment, the below git workflow was used:
 1. Fork the repository from the original repository shared.
 2. Cloned the repo to my machine: `git clone https://github.com/slysiele/yolo.git`
 3. Create a .gitignore file or use present one to add unnecessary files from version control
-4. 
-
+4. Added the client docker file
+   `cd client`
+   `git add Dockerfile`
+5. Added the backend docker file
+   `cd backend`
+   `git add Dockerfile`
+6. Added the docker-compose file to the repo
+   `git add docker-compose.yaml`
+7. Commited all changes done
+   `git commit -m "commit message"`
+8. Pushed changes as I commited them
+   `git push`
+9. Build all the images
+   `docker compose up --build`
+10. 
 
