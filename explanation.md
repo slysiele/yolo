@@ -73,7 +73,37 @@ CMD ["npm", "start"]
 
 ```
 
-## 3. Git Workflow to achieve the given tasks
+## 3. Docker Compose Networking
+Docker compose orchastrates the containers (backend,frontend and mongo db) into a single application environment. By default, Docker compose creates a bridge network for the services allowing them to communicate. Below is the networking section on the docker-compose.yaml:
+
+backend:
+    # ...
+    ports:
+      - "5000:5000"
+    networks:
+      - yolo_app-net
+
+  client:
+    # ...
+    ports:
+      - "3000:80"
+    networks:
+      - yolo_app-net
+  
+  mongodb:
+    # ...
+    ports:
+      - "27017:27017"
+    networks:
+      - yolo_app-net
+
+  networks:
+    yolo_app-net:
+      driver: bridge
+
+All containers are connected to the yolo_app-net bridge network.
+
+## 4. Git Workflow to achieve the given tasks
 
 To carry out the tasks given on the assessment, the below git workflow was used:
 
