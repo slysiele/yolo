@@ -6,9 +6,12 @@ For this assessment, the base image used to build the containers is `node:20-alp
  2. Backend: `node:20-alpine3.21`
  3. Mongo : `mongo:8.0`
 
+## 2. Dockerfiles created for each container
 
 
-## 2. Git Workflow to achieve the given tasks
+
+
+## 3. Git Workflow to achieve the given tasks
 
 To carry out the tasks given on the assessment, the below git workflow was used:
 
