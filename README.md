@@ -63,4 +63,32 @@ NETWORK ID     NAME                   DRIVER    SCOPE
 05c0b99a3ca4   yolo_app-net           bridge    local
 ec7d68181b5a   bridge                 bridge    local
 
+# File structure
+. ├── backend │ └── Dockerfile ├── client │ └── Dockerfile └── docker-compose.yaml
+
+# Pushing to Dockerhub
+silvestor@silvestor:~/WORKSPACE/yolo$ sudo docker push sielei/yolo-client:v1.0.0
+The push refers to repository [docker.io/sielei/yolo-client]
+7c1e76b94c0c: Pushed 
+a0636672c7fc: Pushed 
+6dba76576010: Pushed 
+51b6aefac2f5: Pushed 
+6f197061abd6: Pushed 
+ed2f467e1cfc: Pushed 
+49c50d3fe932: Pushed 
+aad7be8b43d9: Pushed 
+994456c4fd7b: Pushed 
+v1.0.0: digest: sha256:9af059719ae1e37413bc0d1c0bc449beeb71411ddded4814522840fb188b4087 size: 2200
+
+# Images of persistent data when adding products and images deployed to github
+The images are on the root folder of the project. The below image names show: images deployed to github and screenshot of yolo webapp of the added products.
+
+productsadded.png, imagesdeployed.png, backendwithversion.png and clientwithversion.png
+
+# To access application on browser
+Open a browser and navigate to this link: http://localhost:3000/
+
+# To stop the running containers
+run the following command: docker compose down
+
 
