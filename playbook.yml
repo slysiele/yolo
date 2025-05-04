@@ -1,0 +1,13 @@
+---
+- name: Yolo ecommerce playbook
+  hosts: all
+  become: yes
+
+  vars_files:
+    - vars/main.yml
+
+  tasks:
+    - name: Print app path
+      debug: 
+      msg: "App will be located at {{ app_path }}"
+
