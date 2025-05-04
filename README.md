@@ -173,4 +173,16 @@ changed: [default]
 PLAY RECAP *********************************************************************
 default                    : ok=25   changed=10   unreachable=0    failed=0    skipped=1    rescued=0    ignored=0 
 
+### pulled images on vagrant box
+vagrant@vagrant:~/yolo$ docker images
+REPOSITORY               TAG       IMAGE ID       CREATED             SIZE
+silvestor/yolo-client    v1.0.0    284c4b56b3b2   About an hour ago   50.3MB
+silvestor/yolo-backend   v1.0.0    cf60e25c56bf   About an hour ago   162MB
+mongo                    latest    f6a661f83eee   2 days ago          890MB
+
+vagrant@vagrant:~/yolo$ docker ps
+CONTAINER ID   IMAGE                           COMMAND                  CREATED             STATUS             PORTS                                     NAMES
+1a6f0d68e25a   silvestor/yolo-backend:v1.0.0   "docker-entrypoint.s…"   About an hour ago   Up About an hour   0.0.0.0:5000->5000/tcp                    yolo-backend
+3abd5e5477b1   mongo:latest                    "docker-entrypoint.s…"   About an hour ago   Up About an hour   0.0.0.0:27017->27017/tcp                  app-mongo
+f43323787974   silvestor/yolo-client:v1.0.0    "/docker-entrypoint.…"   About an hour ago   Up About an hour   0.0.0.0:3000->80/tcp, [::]:3000->80/tcp   yolo-client
 
