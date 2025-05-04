@@ -77,6 +77,5 @@ Vagrant.configure("2") do |config|
    # Ansible configs
   config.vm.provision "ansible" do |ansible|
     ansible.playbook = "playbook.yml"
-    ansible.verbose = "vv"
   end
 end

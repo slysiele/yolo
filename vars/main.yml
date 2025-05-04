@@ -7,7 +7,7 @@ compose_file: "/home/vagrant/yolo/"
 github_repo_url: https://github.com/slysiele/yolo.git
 
 # Git branch
-github_branch: "main"
+github_branch: "master"
 
 # Frontend port
 frontend_port: 3000
