@@ -91,4 +91,11 @@ Open a browser and navigate to this link: http://localhost:3000/
 # To stop the running containers
 run the following command: docker compose down
 
-
+### ANSIBLE AUTOMATION
+Add a vagrant vm in this case geerlingguy ubuntu2004
+ - vagrant box add geerlingguy/ubuntu2004
+ - vagrant box list
+ - vagrant init geerlingguy/ubuntu2004
+ - vagrant up
+ - vagrant status
+ - vagrant ssh-config
