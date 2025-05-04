@@ -186,3 +186,8 @@ CONTAINER ID   IMAGE                           COMMAND                  CREATED 
 3abd5e5477b1   mongo:latest                    "docker-entrypoint.s…"   About an hour ago   Up About an hour   0.0.0.0:27017->27017/tcp                  app-mongo
 f43323787974   silvestor/yolo-client:v1.0.0    "/docker-entrypoint.…"   About an hour ago   Up About an hour   0.0.0.0:3000->80/tcp, [::]:3000->80/tcp   yolo-client
 
+## Step 2 Terraform
+Created a new branch Stage_two
+Installed terraform, linked terraform and ansible
+Run terraform init to add the rest of the files and terraform apply
+
