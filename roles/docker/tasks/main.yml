@@ -3,6 +3,11 @@
 # Installing and Configure Docker
 
 # Install Python3 and pip3
+- name: Update apt cache
+  apt:
+    update_cache: yes
+  become: true
+
 - name: Install Python3 and pip3
   apt:
     name:
