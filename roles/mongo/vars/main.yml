@@ -1,3 +1,4 @@
-#SPDX-License-Identifier: MIT-0
 ---
-# vars file for mongo
+compose_file: "/home/vagrant/yolo/"
+mongo_container_name: app-mongo
+mongo_network: app-net

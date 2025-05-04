@@ -1,3 +1,26 @@
-#SPDX-License-Identifier: MIT-0
+
 ---
-# tasks file for mongo
+- name: Ensure mynetwork exists
+  docker_network:
+    name: app-net
+    state: present
+
+- name: Ensure MongoDB data volume exists
+  docker_volume:
+    name: app-mongo-data
+    state: present
+
+- name: Run MongoDB container
+  docker_container:
+    name: app-mongo
+    image: mongo:latest
+    state: started
+    networks:
+      - name: app-net
+    volumes:
+      - source: app-mongo-data
+        target: /data/db
+        type: volume
+    ports:
+      - "27017:27017"
+  tags: mongodb
