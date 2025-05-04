@@ -1,0 +1,16 @@
+---
+
+# app path
+compose_file: "/home/vagrant/yolo/"
+
+# Github repo
+github_repo_url: https://github.com/slysiele/yolo.git
+
+# Git branch
+github_branch: "main"
+
+# Frontend port
+frontend_port: 3000
+
+# Backend port
+backend_port: 5000
