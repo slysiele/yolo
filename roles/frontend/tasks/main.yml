@@ -1,3 +1,12 @@
-#SPDX-License-Identifier: MIT-0
+
 ---
-# tasks file for frontend
+- name: Pull image from repository
+  docker_image:
+    name: silvestor/yolo-client:v1.0.0
+    source: pull
+
+- name: Build frontend Docker image
+  command: docker build -t frontend-image .
+  args:
+    chdir: "{{ compose_file }}client"
+  tags: frontend
