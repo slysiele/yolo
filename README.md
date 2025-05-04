@@ -103,3 +103,74 @@ Add a vagrant vm in this case geerlingguy ubuntu2004
  Add configuration on vagrant file to specify the location of ansible playbook
  implement ansible tasks: ansible-galaxy init 
  run vagrant provision
+
+ ## Run the file using  vagrant provision to test its working
+ silvestor@silvestor:~/WORKSPACE/yolo$ vagrant provision
+==> default: Running provisioner: ansible...
+    default: Running ansible-playbook...
+
+PLAY [Yolo ecommerce playbook] *************************************************
+
+TASK [Gathering Facts] *********************************************************
+[WARNING]: Platform linux on host default is using the discovered Python
+interpreter at /usr/bin/python3.8, but future installation of another Python
+interpreter could change the meaning of that path. See
+https://docs.ansible.com/ansible-
+core/2.18/reference_appendices/interpreter_discovery.html for more information.
+ok: [default]
+
+TASK [docker : Update apt cache] ***********************************************
+changed: [default]
+
+TASK [docker : Install Python3 and pip3] ***************************************
+ok: [default]
+
+TASK [docker : Update pip] *****************************************************
+ok: [default]
+
+TASK [docker : Install 'Docker SDK for Python' using pip] **********************
+ok: [default]
+
+TASK [docker : Add Docker GPG key] *********************************************
+ok: [default]
+
+TASK [docker : Add Docker official repository] *********************************
+ok: [default]
+
+TASK [docker : Install Docker packages] ****************************************
+ok: [default]
+
+TASK [docker : Start Docker service] *******************************************
+ok: [default]
+
+TASK [docker : Add current user to docker group] *******************************
+ok: [default]
+
+TASK [docker : Download Docker Compose binary] *********************************
+ok: [default]
+
+TASK [docker : Verify Docker Compose installation] *****************************
+changed: [default]
+
+TASK [docker : Clone GitHub repository] ****************************************
+ok: [default]
+
+TASK [docker : Check if docker-compose.yaml exists] ****************************
+ok: [default]
+
+TASK [docker : Copy docker-compose.yaml] ***************************************
+skipping: [default]
+
+TASK [docker : Ensure correct permissions for Docker Compose file] *************
+ok: [default]
+
+TASK [docker : Run Docker Compose pull] ****************************************
+changed: [default]
+
+TASK [docker : Deploy Docker Compose] ******************************************
+changed: [default]
+
+PLAY RECAP *********************************************************************
+default                    : ok=25   changed=10   unreachable=0    failed=0    skipped=1    rescued=0    ignored=0 
+
+
