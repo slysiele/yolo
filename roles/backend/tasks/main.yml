@@ -1,3 +1,23 @@
-#SPDX-License-Identifier: MIT-0
+
 ---
-# tasks file for backend
+- name: Pull image from repository
+  docker_image:
+    name: silvestor/yolo-backend:v1.0.0
+    source: pull
+
+- name: Create Node.js Backend Container
+  docker_container:
+    name: yolo-backend
+    image: silvestor/yolo-backend:v1.0.0
+    networks:
+      - name: app-net
+    ports:
+      - "5000:5000"
+    command: "npm start"
+  become: yes
+
+- name: Build backend Docker image
+  command: docker build -t backend-image .
+  args:
+    chdir: "{{ compose_file }}backend"
+  tags: backend
