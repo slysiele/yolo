@@ -1,0 +1,63 @@
+version: "3.8"
+
+services:
+  yolo-frontend:
+    image: silvestor/yolo-client:v1.0.0
+    build: 
+      context: ./client
+      dockerfile: Dockerfile
+    container_name: yolo-client
+    stdin_open: true
+    tty: true
+    ports:
+      - "3000:80"
+    depends_on: 
+      - yolo-backend
+    networks:
+      - app-net
+    volumes:
+      - ./client:/home/vagrant/yolo/client
+
+  yolo-backend:
+    image: silvestor/yolo-backend:v1.0.0
+    build: 
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: yolo-backend
+    stdin_open: true
+    tty: true
+    restart: always
+    ports:
+      - "5000:5000"
+    depends_on: 
+      - mongodb
+    networks:
+      - app-net
+    volumes:
+      - ./backend:/home/vagrant/yolo/backend
+
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb
+    ports:
+      - "27017:27017"
+    networks:
+      - app-net
+    volumes:
+      - type: volume
+        source: app-mongo-data
+        target: /data/db
+
+networks:
+  mynetwork:
+    name: app-net
+    driver: bridge
+    attachable: true
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16 
+          ip_range: 172.20.0.0/16 
+
+volumes:
+  mongodb_data:
+    driver: local
