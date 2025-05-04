@@ -99,5 +99,7 @@ Add a vagrant vm in this case geerlingguy ubuntu2004
  - vagrant up
  - vagrant status
  - vagrant ssh-config
- 
- Add configuration on vagrant file to specify the location of ansible playbook 
+
+ Add configuration on vagrant file to specify the location of ansible playbook
+ implement ansible tasks: ansible-galaxy init 
+ run vagrant provision
