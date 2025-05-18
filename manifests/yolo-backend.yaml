@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: yolo-backend
+  namespace: gke-devops-week8
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: yolo-backend
+  template:
+    metadata:
+      labels:
+        app: yolo-backend
+    spec:
+      containers:
+        - name: yolo-backend
+          image: gcr.io/gke-devops-week8/yolo-backend:v1.0.0
+          ports:
+            - containerPort: 5000
+          resources:
+            requests:
+              memory: "256Mi"   
+              cpu: "500m"       
+            limits:
+              memory: "512Mi"   
+              cpu: "1000m"      
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: yolo-backend
+  namespace: gke-devops-week8
+spec:
+  selector:
+    app: yolo-backend
+  ports:
+    - protocol: TCP
+      port: 5000
+      targetPort: 5000
+  type: LoadBalancer
