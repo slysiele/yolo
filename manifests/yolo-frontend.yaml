@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: yolo-frontend
+  namespace: gke-devops-week8
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: yolo-frontend
+  template:
+    metadata:
+      labels:
+        app: yolo-frontend
+    spec:
+      containers:
+      - name: yolo-frontend
+        image: gcr.io/gke-devops-week8/yolo-client:v1.0.0 
+        ports:  
+          - containerPort: 80
+        resources:
+          requests:
+            memory: "128Mi"  
+            cpu: "250m"      
+          limits:
+              memory: "256Mi"  
+              cpu: "500m"      
