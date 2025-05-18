@@ -25,3 +25,19 @@ spec:
           limits:
               memory: "256Mi"  
               cpu: "500m"      
+
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: yolo-frontend
+  namespace: gke-devops-week8
+spec:
+  selector:
+    app: yolo-frontend
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+  type: LoadBalancer
