@@ -18,24 +18,13 @@ spec:
           image: gcr.io/gke-devops-week8/yolo-backend:v1.0.0
           ports:
             - containerPort: 5000
+          env:
+            - name: MONGODB_URI
+              value: "mongodb://mongodb:27017/yolomy"
           resources:
             requests:
               memory: "256Mi"   
               cpu: "500m"       
             limits:
               memory: "512Mi"   
-              cpu: "1000m"      
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: yolo-backend
-  namespace: gke-devops-week8
-spec:
-  selector:
-    app: yolo-backend
-  ports:
-    - protocol: TCP
-      port: 5000
-      targetPort: 5000
-  type: LoadBalancer
+              cpu: "1000m"
