@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: yolo-frontend
-        image: gcr.io/gke-devops-week8/yolo-client:v1.0.0 
+        image: gcr.io/gke-devops-week8/yolo-client:v1.0.1 
         ports:  
           - containerPort: 80
         resources:
